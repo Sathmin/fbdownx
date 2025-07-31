@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Video Downloader</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 50px; }
+    input { width: 80%; padding: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; margin-top: 10px; }
+    .result { margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <h2>Facebook Video Downloader</h2>
+  <input type="text" id="fbUrl" placeholder="Paste Facebook video URL here" />
+  <br>
+  <button onclick="download()">Download</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    async function download() {
+      const url = document.getElementById('fbUrl').value.trim();
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = 'Loading...';
+
+      try {
+        const res = await fetch(https://saviya-kolla-api.koyeb.app/download/fb?url=encodeURIComponent(url));
+        const data = await res.json();
+
+        if (data        data.result        data.result.sd) 
+          resultDiv.innerHTML = `
+            <p><strong>Title:</strong>{data.result.title || 'No title'}</p><a href="data.result.sd" target="_blank">Download SD</a><br>{data.result.hd ? <a href="${data.result.hd}" target="_blank">Download HD</a> : ''}
+          `;
+        } else {
+          resultDiv.innerHTML = 'Video not found or API error.';
+        }
+      } catch (e) {
+        resultDiv.innerHTML = 'Failed to fetch data.';
+      }
+    }
+  </script>
+
+</body>
+</html>
